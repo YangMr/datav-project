@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #room{
+            /*width: 100%;*/
+        }
+    </style>
+    <script src="js/echarts.min.js"></script>
+
+</head>
+<body>
+
+
+    <div id="room" style="width: 40rem; height: 40rem;"></div>
+</body>
+</html>
+<script>
+    // 1. 下载并引入echarts.js  完成
+    // 2. 创建渲染图表的画布
+    // 3. 初始化echarts实例对象
+    const room = document.getElementById("room")
+    const myCharts = echarts.init(room)
+    // 4. 指定配置项和数据(option)
+    const option = {
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: [150, 230, 224, 218, 135, 147, 260],
+                type: 'line'
+            }
+        ]
+    };
+    // 5. 将配置项设置给echarts实例对象 (渲染echarts图表)
+    myCharts.setOption(option)
+
+
+    // 监听浏览器的变化
+    // window.onresize = function (){
+    //     console.log("浏览器发生变化")
+    //     myCharts.resize()
+    // }
+    window.addEventListener("resize",function(){
+        myCharts.resize()
+    })
+
+</script>
