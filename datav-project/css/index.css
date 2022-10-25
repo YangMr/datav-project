@@ -13,6 +13,9 @@ i{
     html{
         font-size : 42.66px !important;
     }
+    .overview ul li span{
+        top: -14px !important;
+    }
 }
 @media screen and (min-width: 1920px){
     html{
@@ -47,7 +50,7 @@ html,body{
     border-width: 0.6375rem 0.475rem 0.25rem 1.65rem;
     border-image-source: url("../image/border.png");
     border-image-slice: 51 38 20 132;
-    margin-bottom:20px;
+    margin-bottom:10px;
 }
 .inner{
     position : absolute;

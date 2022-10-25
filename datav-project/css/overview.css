@@ -16,4 +16,6 @@
 .overview ul li span{
     color: #4c9bfd;
     font-size: 0.2rem;
+    position: relative;
+    top: -8px;
 }

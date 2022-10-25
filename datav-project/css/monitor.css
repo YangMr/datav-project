@@ -1,0 +1,80 @@
+.monitor{
+    height : 6rem;
+}
+.monitor .inner{
+    display: flex;
+    flex-direction: column !important;
+    padding:0.3rem 0;
+}
+.monitor .tabs{
+    display: flex;
+    align-items: center;
+    padding: 0 0.45rem;
+    margin-bottom: 0.225rem;
+}
+.monitor .tabs a{
+    color : #1950c4;
+    text-decoration: none;
+    font-size: 0.225rem;
+}
+.monitor .tabs a.active{
+    color : #fff;
+}
+.monitor .tabs a:first-child{
+    padding-right: 20px;
+    border-right:1px solid #fff;
+}
+.monitor .tabs a:last-child{
+    padding-left: 20px;
+}
+.monitor .content{
+    flex : 1;
+}
+.monitor .content .head{
+    display:flex;
+    justify-content: space-between;
+    font-size : 0.175rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.15rem 0.45rem;
+    color :#68d8fe;
+}
+.monitor .content .marquee-view{
+    width: 100%;
+    overflow: hidden;
+    height: 258px;
+    position: relative;
+}
+.monitor .content .marquee-view .marquee{
+    animation: move 15s linear infinite;
+}
+.monitor .content .marquee-view .marquee:hover{
+    animation-play-state: paused;
+}
+.monitor .content .marquee-view .marquee .row{
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.05;
+    font-size: 0.15rem;
+    color: #61a8ff;
+    padding: 0.15rem 0.45rem;
+}
+.monitor .content .marquee-view .marquee .row:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #68d8fe;
+
+}
+.monitor .content .marquee-view .marquee .col:nth-child(2) {
+    width: 2.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@keyframes move {
+    0%{
+        transform: translateY(0%);
+    }
+    100%{
+        transform: translateY(-50%);
+    }
+}

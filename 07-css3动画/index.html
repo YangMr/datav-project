@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .marquee-view{
+            height : 300px;
+            border:1px solid #ccc;
+            margin:50px auto;
+            width: 500px;
+        }
+        .marquee{
+            height: 800px;
+            width: 80%;
+            background: purple;
+            animation: sport 10s linear infinite;
+        }
+
+        @keyframes sport{
+            0%{
+                transform: translateY(0%);
+            }
+            100%{
+                transform: translateY(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+  <div class="marquee-view">
+      <div class="marquee"></div>
+  </div>
+</body>
+</html>
