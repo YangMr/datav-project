@@ -412,4 +412,165 @@ $(function(){
     })
 })
 
+// module 实现订单
+$(function(){
+    // 模拟订单量数据
+    const data = {
+        day365 : {
+            orders : '30,321,988',
+            amount : 99882
+        },
+        day90 : {
+            orders : '301,987',
+            amount : 9876
+        },
+        day30 : {
+            orders : '1,987',
+            amount : 3834
+        },
+        day1 : {
+            orders : '987',
+            amount : 835
+        }
+    }
+    const order = [
+        {
+            orders : '30,321,988',
+            amount : 99882
+        },
+        {
+            orders : '301,987',
+            amount : 9876
+        },
+        {
+            orders : '1,987',
+            amount : 3834
+        },
+        {
+            orders : '987',
+            amount : 835
+        }
+    ]
+    let $h4Order = $('.order h4:eq(0)')
+    let $h4Amount = $('.order h4:eq(1)')
+    $h4Order.html(data['day365'].orders)
+    $h4Amount.html(data['day365'].amount)
+    // this.dataset.type 获取标签自定义属性的值
+    $(".order .filter a").on("click", function(){
+        $(this).addClass("active").siblings().removeClass("active")
+        const currentData = data[this.dataset.type]
+        $h4Order.html(currentData.orders)
+        $h4Amount.html(currentData.amount)
+        console.log(currentData)
+    })
+})
+
+// module 实现销售额
+$(function (){
+    let _index = 0
+    let timer
+    $(".sales .caption a").eq(_index).addClass("active")
+
+    function autoToggle(){
+        timer = setInterval(()=>{
+            _index++
+            if( _index === 4){
+                _index = 0
+            }
+            asyncAddClass(_index)
+        },1000)
+    }
+    autoToggle()
+
+    $(".sales .caption a").on("click", function(){
+        _index = $(this).index() - 1
+        asyncAddClass(_index)
+
+    })
+
+    $(".sales").hover(function (){
+        clearInterval(timer)
+    },function (){
+        autoToggle()
+    })
+
+    function asyncAddClass(index){
+        $(".sales .caption a").eq(index).addClass('active').siblings("a").removeClass('active')
+    }
+
+
+})
+
+// module 实现销售额折线图
+$(function (){
+    // 1. 安装echarts并引入
+    // 2. 创建渲染echarts的画布
+    // 3. 获取画布并对echarts进行初始化
+    const line = document.querySelector(".line")
+    const myCharts = echarts.init(line)
+    // 4. 设置配置项数据
+    const option = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            right : "10%",
+            textStyle : {
+                color : "#4c9bfd"
+            },
+            data: ['Email', 'Union Ads']
+        },
+        grid: {
+            top : "20%",
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true,
+            show : true,
+            borderColor : "#012f4a",
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            axisLabel : {
+                color : "#4c9bfd"
+            },
+            axisTick : {
+                show : false
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel : {
+                color : "#4c9bfd"
+            },
+            splitLine : {
+                lineStyle : {
+                    color : "#012f4a"
+                }
+            }
+        },
+        series: [
+            {
+                name: 'Email',
+                type: 'line',
+                stack: 'Total',
+                data: [120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name: 'Union Ads',
+                type: 'line',
+                stack: 'Total',
+                data: [220, 182, 191, 234, 290, 330, 310]
+            }
+        ]
+    };
+    // 5. 渲染图表
+    myCharts.setOption(option)
+    // 6. 设置图表自适应
+    window.addEventListener("resize", function(){
+        myCharts.resize()
+    })
+})
 

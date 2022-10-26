@@ -1,0 +1,43 @@
+.order{
+    height : 1.875rem;
+}
+.order .filter{
+    display: flex;
+}
+.order .filter a{
+    color: #1950c4;
+    font-size: 0.225rem;
+    display:block;
+    text-decoration: none;
+    padding: 0 0.225rem;
+    border-right: 0.025rem solid #00f2f1;
+    height : 0.225rem;
+    line-height: 1;
+}
+.order .filter a.active{
+    color : #fff;
+    font-size: 0.25rem;
+}
+.order .filter a:first-child{
+    padding-left:0;
+}
+.order .filter a:last-child{
+    border-right: none;
+}
+.order .data{
+    display:flex;
+    margin-top: 0.25rem;
+}
+.order .data .item{
+    width: 50%;
+}
+.order .data .item h4{
+    font-size : 0.35rem;
+    color : #fff;
+    margin-bottom: 0.1rem;
+}
+.order .data .item span{
+    font-size : 0.2rem;
+    color : #4c9bfd;
+    display: block;
+}

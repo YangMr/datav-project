@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/point.css" type="text/css">
     <link rel="stylesheet" href="css/map.css" type="text/css">
     <link rel="stylesheet" href="css/users.css" type="text/css">
+    <link rel="stylesheet" href="css/order.css" type="text/css">
+    <link rel="stylesheet" href="css/sales.css" type="text/css">
     <script src="js/echarts.min.js"></script>
     <script src="js/flexible.js"></script>
     <script src="js/jquery-3.6.1.min.js"></script>
@@ -149,8 +151,41 @@
             </div>
         </div>
         <div class="column">
-<!--            <div>1</div>-->
-<!--            <div>2</div>-->
+            <div class="panel order">
+                <div class="inner">
+                    <div class="filter">
+                        <a data-type="day365" class="active" href="javascript:;">365天</a>
+                        <a data-type="day90"  href="javascript:;">90天</a>
+                        <a data-type="day30" href="javascript:;">30天</a>
+                        <a data-type="day1" href="javascript:;">24小时</a>
+                    </div>
+                    <div class="data">
+                        <div class="item">
+                            <h4></h4>
+                            <span><i class="icon-dot"></i> 订单量</span>
+                        </div>
+                        <div class="item">
+                            <h4></h4>
+                            <span><i class="icon-dot"></i> 销售额(万元)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel sales">
+                <div class="inner">
+                   <div class="caption">
+                       <h3>销售额统计</h3>
+                       <a href="javascript:;">年</a>
+                       <a href="javascript:;">季</a>
+                       <a href="javascript:;">月</a>
+                       <a href="javascript:;">周</a>
+                   </div>
+                   <div class="chart">
+                       <div class="label">单位:万</div>
+                       <div class="line"></div>
+                   </div>
+                </div>
+            </div>
 <!--            <div>3</div>-->
 <!--            <div>4</div>-->
         </div>
