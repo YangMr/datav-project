@@ -50,7 +50,7 @@ html,body{
     border-width: 0.6375rem 0.475rem 0.25rem 1.65rem;
     border-image-source: url("../image/border.png");
     border-image-slice: 51 38 20 132;
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 .inner{
     position : absolute;

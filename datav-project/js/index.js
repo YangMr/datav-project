@@ -3,8 +3,8 @@
  * @date 2022/10/25 08:40
  */
 
-// 等待页面所有dom节点加载完毕之后在执行
-$(document).ready(function(){
+// 渲染概览数据
+$(function(){
     // 模拟概览的数据 (销售量的数据)
     const overViewData = [
         {
@@ -50,7 +50,7 @@ $(document).ready(function(){
     $(".overview ul").html(str)
 })
 
-// 等待页面所有dom节点加载完毕之后在执行
+// 渲染交易数据
 $(function (){
     // 设置实时交易详情默认选中
     $('.monitor .tabs a').eq(0).addClass('active')
@@ -231,7 +231,7 @@ $(function (){
     cloneData()
 })
 
-// 等待页面所有dom节点加载完毕之后在执行
+// module 实现饼图
 $(function (){
     // 3. 实例化echarts
     const pie = document.querySelector(".pie")
@@ -279,6 +279,135 @@ $(function (){
 
     // 6. 实现图表自适应
     window.addEventListener("resize",()=>{
+        myCharts.resize()
+    })
+})
+
+// module 实现柱状图
+$(function(){
+    const item = {
+            value : 1200,
+            itemStyle : {
+                color : "#254065"
+            },
+            tooltip : {
+                extraCssText : 'opacity:0'
+            }
+    }
+    // 1. 安装并引入echarts
+    // 2. 创建渲染echarts的画布
+    // 3. 获取画布并实例化echarts
+    const bar = document.querySelector(".bar")
+    const myCharts = echarts.init(bar)
+    // 4. 设置配置数据
+    const option = {
+        color : {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: '#00fffb' // 0% 处的颜色
+            }, {
+                offset: 1, color: '#0061ce' // 100% 处的颜色
+            }],
+            global: false // 缺省为 false
+        },
+        tooltip: {
+            formatter: '{a}<br />{b}: {c}',
+            backgroundColor : "rgba(0,0,0,0.5)",
+            borderColor : "rgba(0,0,0,0)",
+            textStyle : {
+                color : "#fff"
+            },
+            trigger: 'axis',
+            axisPointer: {
+                type: 'none'
+            }
+        },
+        grid: {
+            top : "3%",
+            left: '0%',
+            right: '3%',
+            bottom: '3%',
+            containLabel: true,
+            show : true,
+            borderColor : "rgba(0,240,255,0.3)"
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: [
+                    "上海",
+                    "广州",
+                    "北京",
+                    "深圳",
+                    "合肥",
+                    "",
+                    "......",
+                    "",
+                    "杭州",
+                    "厦门",
+                    "济南",
+                    "成都",
+                    "重庆"
+                ],
+                axisTick: {
+                    alignWithLabel: false,
+                    show : false
+                },
+                axisLine : {
+                    lineStyle : {
+                        color : "rgba(0,240,255,0.3)"
+                    }
+                },
+                axisLabel : {
+                    show :true,
+                    color : '#4c9bfd'
+                },
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel : {
+                    color : '#4c9bfd'
+                },
+                splitLine : {
+                    lineStyle : {
+                        color : "rgba(0,240,255,0.3)"
+                    }
+                },
+            }
+        ],
+        series: [
+            {
+                name: '用户总量',
+                type: 'bar',
+                barWidth: '60%',
+                data: [
+                    2100,
+                    1900,
+                    1700,
+                    1560,
+                    1400,
+                    item,
+                    item,
+                    item,
+                    900,
+                    750,
+                    600,
+                    480,
+                    240
+                ]
+            }
+        ]
+    };
+    // 5. 渲染图表
+    myCharts.setOption(option)
+    // 6. 设置图表自适应
+    window.addEventListener("resize", function (){
         myCharts.resize()
     })
 })
