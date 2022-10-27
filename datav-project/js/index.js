@@ -638,22 +638,32 @@ $(function (){
     const myCharts = echarts.init(radar)
     // 4. 设置配置项数据
     const dataBJ = [
-        [200, 100, 90, 2, 20, 30, 1],
+        [110, 90, 80, 60, 30]
     ]
     const lineStyle = {
-        width: 1,
-        opacity: 0.5
-    }
+        width: 3,
+    };
     const option = {
-        center : ["50%","50%"],
-        radius : "50%",
+        tooltip : {
+            show: true,
+            position: ["50%", "50%"],
+            textStyle:{
+                fontSize: 12,
+                color : "#fff"
+            },
+            backgroundColor : 'rgba(0,0,0,0.5)',
+            borderColor: 'rgba(0,0,0,0.5)',
+        },
+
         radar: {
+            center : ["50%","50%"],
+            radius : "50%",
             indicator: [
-                { name: '淘宝', max: 300 },
-                { name: '京东', max: 250 },
-                { name: '苏宁', max: 300 },
-                { name: '微商', max: 5 },
-                { name: '其他', max: 200 },
+                { name: '淘宝', max: 120,  },
+                { name: '京东', max: 120,  },
+                { name: '苏宁', max: 120, },
+                { name: '微商', max: 120,  },
+                { name: '其他', max: 120, },
             ],
             shape: 'circle',
             splitNumber: 4,
@@ -676,16 +686,17 @@ $(function (){
         },
         series: [
             {
-                name: 'Beijing',
+                name: '上海',
                 type: 'radar',
                 lineStyle: lineStyle,
                 data: dataBJ,
-                symbol: 'none',
+                symbol: 'circle',
+                symbolSize : 5,
                 itemStyle: {
-                    color: '#F9713C'
+                    color: '#fff'
                 },
                 areaStyle: {
-                    opacity: 0.1
+                    color: 'rgba(238, 197, 102, 0.6)',
                 }
             }
         ]
@@ -695,6 +706,79 @@ $(function (){
     // 6. 设置图表自适应
     window.addEventListener("resize", function (){
         myCharts.resize()
+    })
+})
+
+// module 实现销售进度图表
+$(function(){
+    const gauge = document.querySelector(".gauge")
+    const myCharts = echarts.init(gauge)
+    const option = {
+        color : ["#f60", "yellow", "green"],
+        series: [
+            {
+                name: 'Access From',
+                startAngle: 180,
+                type: 'pie',
+                radius: ['130%', '150%'],
+                center : ["48%","86%"],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '40',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {
+                        value: 100,
+                        itemStyle: {
+                            color : new echarts.graphic.LinearGradient(
+                                0,
+                                0,
+                                0,
+                                1,
+                                [
+                                    {offset : 0, color : "#00c9e0"},
+                                    {offset : 1, color : "#005fc1"}
+                                ])
+                        }
+
+                    },
+                    { value: 100, itemStyle : {
+                            color : '#12274d'
+                        } },
+                    {
+                        value: 200,
+                        itemStyle : {
+                            color : 'transparent'
+                        }
+                    },
+
+                ]
+            }
+        ]
+    };
+    myCharts.setOption(option)
+    window.addEventListener("resize", function(){
+        myCharts.resize()
+    })
+})
+
+// module 全国热榜
+$(function(){
+    $(".sup li").hover(function(){
+        $(this).addClass("active").siblings().removeClass("active")
+    },function(){
+
     })
 })
 

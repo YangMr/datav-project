@@ -1,3 +1,86 @@
 .hot{
     height: 3.5rem;
 }
+.hot .inner{
+    display : flex;
+}
+.hot .all{
+    width : 2.1rem;
+    color : #4c9bfd;
+    display:flex;
+    flex-direction : column;
+}
+.hot .all ul{
+    flex : 1;
+    display : flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 0.15rem;
+    /*padding-left : 0.15rem;*/
+}
+.hot .all ul li{
+    display : flex;
+    align-items: center;
+}
+.hot .all ul li span{
+    font-size : 0.15rem;
+    margin-left: 0.25rem;
+    vertical-align: middle;
+    position:relative;
+    top: -0.025rem;
+}
+.hot .province{
+    flex : 1;
+    display : flex;
+    flex-direction : column;
+}
+.hot .province h3{
+    display : flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.hot .province h3 span:last-child{
+    font-size : 0.125rem;
+    color : #4c9bfd;
+    font-weight:400;
+}
+
+.hot .province .data{
+    /*background-color:yellow;*/
+    flex : 1;
+    overflow: hidden;
+    display : flex;
+}
+.hot .province .data .sup{
+    margin-top: 0.125rem;
+    line-height: 1;
+    margin-bottom: 0.175rem;
+    flex : 1;
+}
+.hot .province .data .sup li{
+    font-size: 0.175rem;
+    color : #4c9bfd;
+    padding: 0.15rem;
+    cursor: pointer;
+    display : flex;
+    justify-content: space-between;
+}
+
+.hot .province .data .sup li.active{
+    color: #a3c6f2;
+    background-color: rgba(10, 67, 188, 0.2);
+}
+.hot .province .data .sub{
+    margin-top: 0.125rem;
+    line-height: 1;
+    margin-bottom: 0.175rem;
+    flex : 1;
+    background-color: rgba(10, 67, 188, 0.2);
+}
+.hot .province .data .sub li{
+    font-size: 0.175rem;
+    color : #4c9bfd;
+    padding: 0.15rem;
+    display : flex;
+    justify-content: space-between;
+}
