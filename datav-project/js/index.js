@@ -478,31 +478,63 @@ $(function (){
                 _index = 0
             }
             asyncAddClass(_index)
+            handleToggleData(_index)
         },1000)
     }
     autoToggle()
 
-    $(".sales .caption a").on("click", function(){
-        _index = $(this).index() - 1
-        asyncAddClass(_index)
 
-    })
-
-    $(".sales").hover(function (){
-        clearInterval(timer)
-    },function (){
-        autoToggle()
-    })
 
     function asyncAddClass(index){
         $(".sales .caption a").eq(index).addClass('active').siblings("a").removeClass('active')
     }
 
+    $(".sales").hover(function(){
+        clearInterval(timer)
+        timer = null
+    },function(){
+        if(timer === null){
+            autoToggle()
+        }
+    })
 
-})
 
-// module 实现销售额折线图
-$(function (){
+    // 模拟销售额数据
+    const data = {
+        // 年
+        year : {
+            info:["2099年","2199年","2299年","2399年","2499年","2599年","2699年","2799年","2899年","2999年","3099年","3199年"],
+            detail:[
+                [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+                [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
+            ],
+        },
+        // 季
+        quarter : {
+            info:["1季度","2季度","3季度","4季度"],
+            detail: [
+                [23, 75, 12, 97],
+                [43, 31, 65, 23]
+            ],
+        },
+        // 月
+        month : {
+            info:["1月", "2月", "3月", "4月", "5月", "6月", "7月","8月","9月","10月","11月","12月"],
+            detail: [
+                [34, 87, 32, 76, 98, 12, 32, 87, 39, 36, 29, 36],
+                [56, 43, 98, 21, 56, 87, 43, 12, 43, 54, 12, 98]
+            ],
+        },
+        // 周
+        week : {
+            info: ["近1周", "近2周", "近3周", "近4周", "近5周", "近6周"],
+            detail: [
+                [43, 73, 62, 54, 91, 54, 84, 43, 86, 43, 54, 53],
+                [32, 54, 34, 87, 32, 45, 62, 68, 93, 54, 54, 24]
+            ]
+        }
+    }
+
     // 1. 安装echarts并引入
     // 2. 创建渲染echarts的画布
     // 3. 获取画布并对echarts进行初始化
@@ -510,6 +542,7 @@ $(function (){
     const myCharts = echarts.init(line)
     // 4. 设置配置项数据
     const option = {
+        color : ["#00f2f1","#ed3f35"],
         tooltip: {
             trigger: 'axis'
         },
@@ -518,7 +551,7 @@ $(function (){
             textStyle : {
                 color : "#4c9bfd"
             },
-            data: ['Email', 'Union Ads']
+            data: ['预期销售额', '实际销售额'],
         },
         grid: {
             top : "20%",
@@ -532,12 +565,17 @@ $(function (){
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            data: ["2099年","2199年","2299年","2399年","2499年","2599年","2699年","2799年","2899年","2999年","3099年","3199年"],
             axisLabel : {
                 color : "#4c9bfd"
             },
             axisTick : {
                 show : false
+            },
+            axisLine : {
+                lineStyle : {
+                    color : "#012f4a"
+                }
             }
         },
         yAxis: {
@@ -553,24 +591,112 @@ $(function (){
         },
         series: [
             {
-                name: 'Email',
+                name: '预期销售额',
                 type: 'line',
                 stack: 'Total',
-                data: [120, 132, 101, 134, 90, 230, 210]
+                data:  [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+                smooth : true
             },
             {
-                name: 'Union Ads',
+                name: '实际销售额',
                 type: 'line',
                 stack: 'Total',
-                data: [220, 182, 191, 234, 290, 330, 310]
+                data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79],
+                smooth : true
             }
         ]
-    };
+    }
     // 5. 渲染图表
     myCharts.setOption(option)
     // 6. 设置图表自适应
     window.addEventListener("resize", function(){
         myCharts.resize()
     })
+
+    $(".sales .caption a").on("click", function(){
+        _index = $(this).index() - 1
+        asyncAddClass(_index)
+        handleToggleData(_index)
+    })
+
+    function handleToggleData(i){
+        const currentAttr =  $(".sales .caption a").get(i).dataset.type
+        const currentData = data[currentAttr]
+        option.xAxis.data = currentData.info
+        option.series[0].data = currentData.detail[0]
+        option.series[1].data = currentData.detail[1]
+        myCharts.setOption(option)
+    }
 })
+
+// module 实现渠道分布
+$(function (){
+    // 1. 安装并引入echarts
+    // 2. 创建渲染echarts的画布
+    // 3. 获取创建的echarts画布， 并进行初始化
+    const radar = document.querySelector(".radar")
+    const myCharts = echarts.init(radar)
+    // 4. 设置配置项数据
+    const dataBJ = [
+        [200, 100, 90, 2, 20, 30, 1],
+    ]
+    const lineStyle = {
+        width: 1,
+        opacity: 0.5
+    }
+    const option = {
+        center : ["50%","50%"],
+        radius : "50%",
+        radar: {
+            indicator: [
+                { name: '淘宝', max: 300 },
+                { name: '京东', max: 250 },
+                { name: '苏宁', max: 300 },
+                { name: '微商', max: 5 },
+                { name: '其他', max: 200 },
+            ],
+            shape: 'circle',
+            splitNumber: 4,
+            axisName: {
+                color: '#4c9bfd'
+            },
+            splitLine: {
+                lineStyle: {
+                    color: "rgba(255,255,255,0.5)"
+                }
+            },
+            splitArea: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: "rgba(255,255,255,0.5)"
+                }
+            }
+        },
+        series: [
+            {
+                name: 'Beijing',
+                type: 'radar',
+                lineStyle: lineStyle,
+                data: dataBJ,
+                symbol: 'none',
+                itemStyle: {
+                    color: '#F9713C'
+                },
+                areaStyle: {
+                    opacity: 0.1
+                }
+            }
+        ]
+    }
+    // 5. 渲染图表
+    myCharts.setOption(option)
+    // 6. 设置图表自适应
+    window.addEventListener("resize", function (){
+        myCharts.resize()
+    })
+})
+
+
 

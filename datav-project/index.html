@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/users.css" type="text/css">
     <link rel="stylesheet" href="css/order.css" type="text/css">
     <link rel="stylesheet" href="css/sales.css" type="text/css">
+    <link rel="stylesheet" href="css/wrap.css" type="text/css">
+    <link rel="stylesheet" href="css/hot.css" type="text/css">
     <script src="js/echarts.min.js"></script>
     <script src="js/flexible.js"></script>
     <script src="js/jquery-3.6.1.min.js"></script>
@@ -173,12 +175,12 @@
             </div>
             <div class="panel sales">
                 <div class="inner">
-                   <div class="caption">
+                   <div class="caption" id="caption">
                        <h3>销售额统计</h3>
-                       <a href="javascript:;">年</a>
-                       <a href="javascript:;">季</a>
-                       <a href="javascript:;">月</a>
-                       <a href="javascript:;">周</a>
+                       <a data-type="year" href="javascript:;">年</a>
+                       <a data-type="quarter" href="javascript:;">季</a>
+                       <a data-type="month" href="javascript:;">月</a>
+                       <a data-type="week" href="javascript:;">周</a>
                    </div>
                    <div class="chart">
                        <div class="label">单位:万</div>
@@ -186,8 +188,26 @@
                    </div>
                 </div>
             </div>
-<!--            <div>3</div>-->
-<!--            <div>4</div>-->
+            <div class="wrap">
+                <div class="panel channel">
+                    <div class="inner">
+                        <h3>渠道分布</h3>
+                        <div class="data">
+                            <div class="radar">1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel quarter">
+                    <div class="inner">
+                        <h3>一季度销售进度</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="panel hot">
+                <div class="inner">
+                    4
+                </div>
+            </div>
         </div>
     </div>
 </body>
