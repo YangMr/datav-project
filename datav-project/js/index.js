@@ -247,7 +247,7 @@ $(function (){
             {
                 name: '销售统计',
                 type: 'pie',
-                radius: ["10%", "70%"],
+                radius: ["10%", "60%"],
                 center: ['50%', '50%'],
                 roseType: 'area',
                 itemStyle: {
@@ -262,14 +262,14 @@ $(function (){
                     length2 : 8  // 设置第二段线条的长度
                 },
                 data: [
-                    { value: 22, name: "云南" },
-                    { value: 28, name: "北京" },
-                    { value: 25, name: "山东" },
-                    { value: 25, name: "河北" },
-                    { value: 32, name: "江苏" },
-                    { value: 22, name: "浙江" },
-                    { value: 31, name: "四川" },
-                    { value: 42, name: "上海" }
+                    { value: 22, name: "云南", label : {color : '#006cff'} },
+                    { value: 28, name: "北京", label : {color : '#60cda0'} },
+                    { value: 25, name: "山东", label : {color : '#ed8884'} },
+                    { value: 25, name: "河北", label : {color : '#ff9f7f'} },
+                    { value: 32, name: "江苏", label : {color : '#0096ff'} },
+                    { value: 22, name: "浙江", label : {color : '#9fe6b8'} },
+                    { value: 31, name: "四川", label : {color : '#32c5e9'} },
+                    { value: 42, name: "上海", label : {color : '#1d9dff'} }
                 ]
             }
         ]
@@ -775,12 +775,152 @@ $(function(){
 
 // module 全国热榜
 $(function(){
+
+    // 模拟服务端返回的数据
+    const hotData = [
+        {
+            city: "北京", // 城市
+            sales: "35, 279", // 销售额
+            flag: true, //  上升还是下降
+            brands: [
+                //  品牌种类数据
+                {name: "华为", num: "9,086", flag: true},
+                {name: "小米", num: "8,341", flag: true},
+                {name: "oppo", num: "7,407", flag: false},
+                {name: "vivo", num: "6,080", flag: false},
+                {name: "荣耀", num: "6,724", flag: false},
+                {name: "iphone", num: "2,170", flag: true}
+            ]
+        },
+        {
+            city: "河北",
+            sales: "23,252",
+            flag: false,
+            brands: [
+                {name: "华为", num: "3,457", flag: false},
+                {name: "小米", num: "2,124", flag: true},
+                {name: "oppo", num: "8,907", flag: false},
+                {name: "vivo", num: "6,080", flag: true},
+                {name: "荣耀", num: "1,724", flag: false},
+                {name: "iphone", num: "1,170", flag: false}
+            ]
+        },
+        {
+            city: "上海",
+            sales: "20,760",
+            flag: true,
+            brands: [
+                {name: "华为", num: "2,345", flag: true},
+                {name: "小米", num: "7,109", flag: true},
+                {name: "oppo", num: "3,701", flag: false},
+                {name: "vivo", num: "6,080", flag: false},
+                {name: "荣耀", num: "2,724", flag: false},
+                {name: "iphone", num: "2,998", flag: true}
+            ]
+        },
+        {
+            city: "江苏",
+            sales: "23,252",
+            flag: false,
+            brands: [
+                {name: "华为", num: "2,156", flag: false},
+                {name: "小米", num: "2,456", flag: true},
+                {name: "oppo", num: "9,737", flag: true},
+                {name: "vivo", num: "2,080", flag: true},
+                {name: "荣耀", num: "8,724", flag: true},
+                {name: "iphone", num: "1,770", flag: false}
+            ]
+        },
+        {
+            city: "山东",
+            sales: "20,760",
+            flag: true,
+            brands: [
+                {name: "华为", num: "9,567", flag: true},
+                {name: "小米", num: "2,345", flag: false},
+                {name: "oppo", num: "9,037", flag: false},
+                {name: "vivo", num: "1,080", flag: true},
+                {name: "荣耀", num: "4,724", flag: false},
+                {name: "iphone", num: "9,999", flag: true}
+            ]
+        }
+    ];
+
+    // str保存的时候最终要渲染的DOM结构与数据
+    let str = ""
+
+    // 遍历数据
+    hotData.forEach(item=>{
+        str += `
+            <li>
+                <span>${item.city}</span>
+                <span>${item.sales} <i class="${item.flag ? 'icon-up' : 'icon-down'}" style="color : #f60;"></i></span>
+            </li>
+        `
+    })
+
+    // 将数据渲染到.sup这个dom节点里面
+    $(".province .sup").html(str)
+
+    let _index = 0
+    let timer
+
+
+    function addClass(i){
+        // 设置第一个li为选中的状态
+        $(".province .sup li").eq(i).addClass("active").siblings().removeClass("active")
+    }
+    addClass(_index)
+
+    function autoPlay(){
+        timer = setInterval(function(){
+            _index++
+            if(_index === 5){
+                _index = 0
+            }
+            addClass(_index)
+            handleToggleData(_index)
+        },1000)
+    }
+
+    autoPlay()
+
+    function handleToggleData(i){
+        // 获取到第一条数据里面的子数据
+        const currentFirstChild = hotData[i].brands
+        // 创建一个变量,保存要渲染的DOM节点与数据
+        let childStr = ""
+        // 遍历数据
+        currentFirstChild.forEach(item=>{
+            console.log(item)
+            childStr += `
+             <li>
+                <span>${item.name}</span>
+                <span>${item.num}<i class="${item.flag ? 'icon-up' : 'icon-down'}"></i></span>
+             </li>
+        `
+        })
+        // 将数据渲染到.sub这个dom节点里面
+        $(".province .sub").html(childStr)
+    }
+    handleToggleData(_index)
+
+
     $(".sup li").hover(function(){
+        clearInterval(timer)
+        timer = null
         $(this).addClass("active").siblings().removeClass("active")
+        _index = $(this).index()
+        handleToggleData(_index)
     },function(){
+        if(timer === null){
+            autoPlay()
+        }
 
     })
 })
+
+
 
 
 
