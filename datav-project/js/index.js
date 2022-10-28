@@ -6,48 +6,59 @@
 // 渲染概览数据
 $(function(){
     // 模拟概览的数据 (销售量的数据)
-    const overViewData = [
-        {
-            id : 1,
-            value : 30,
-            desc : '当日销量',
-            color : '#006cff'
-        },
-        {
-            id : 1,
-            value : 120,
-            desc : '当日销量',
-            color : '#6acca3'
-        },
-        {
-            id : 1,
-            value : 359,
-            desc : '当日销量',
-            color : '#6acca3'
-        },
-        {
-            id : 1,
-            value : "1,390",
-            desc : '当日销量',
-            color : '#ed3f35'
-        }
-    ]
+    // const overViewData = [
+    //     {
+    //         id : 1,
+    //         value : 30,
+    //         desc : '当日销量',
+    //         color : '#006cff'
+    //     },
+    //     {
+    //         id : 1,
+    //         value : 120,
+    //         desc : '当日销量',
+    //         color : '#6acca3'
+    //     },
+    //     {
+    //         id : 1,
+    //         value : 359,
+    //         desc : '当日销量',
+    //         color : '#6acca3'
+    //     },
+    //     {
+    //         id : 1,
+    //         value : "1,390",
+    //         desc : '当日销量',
+    //         color : '#ed3f35'
+    //     }
+    // ]
 
-    // 初始化一个变量，用来保存动态创建的dom节点
-    let str = ""
+    $.ajax({
+        url : 'https://www.fastmock.site/mock/8f24dcfde3518f21e7be9fcce345bb52/echarts/overview',
+        method : 'GET',
+        success : function(response){
+            console.log(response.data.data)
+            let overViewData = response.data.data
 
-    // 循环遍历数据，动态创建dom节点
-    overViewData.forEach(item=>{
-        str += `
+            // 初始化一个变量，用来保存动态创建的dom节点
+            let str = ""
+
+            // 循环遍历数据，动态创建dom节点
+            overViewData.forEach(item=>{
+                str += `
             <li>
                 <h4>${item.value}万</h4>
                 <span><i class="icon-dot" style="color : ${item.color}"></i>${item.desc}</span>
             </li>
         `
+            })
+
+            // 获取ul， 并且动态渲染数据
+            $(".overview ul").html(str)
+        }
     })
 
-    // 获取ul， 并且动态渲染数据
-    $(".overview ul").html(str)
+
 })
 
 // 渲染交易数据
@@ -193,7 +204,6 @@ $(function (){
         $(this).addClass("active").siblings().removeClass("active")
         // 获取到当前所点击元素的下标
         const _index = $(this).index()
-        console.log(_index)
         // 获取到monitor 里面的所有的context
         $(".monitor .content").eq(_index).show().siblings('.content').hide()
 
@@ -461,7 +471,6 @@ $(function(){
         const currentData = data[this.dataset.type]
         $h4Order.html(currentData.orders)
         $h4Amount.html(currentData.amount)
-        console.log(currentData)
     })
 })
 
@@ -892,7 +901,7 @@ $(function(){
         let childStr = ""
         // 遍历数据
         currentFirstChild.forEach(item=>{
-            console.log(item)
+
             childStr += `
              <li>
                 <span>${item.name}</span>
