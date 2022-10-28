@@ -5,10 +5,13 @@
     display : flex;
 }
 .hot .all{
-    width : 2.1rem;
-    color : #4c9bfd;
-    display:flex;
-    flex-direction : column;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.1rem;
+    color: #4c9bfd;
+    font-size: 0.175rem;
+    vertical-align: middle;
 }
 .hot .all ul{
     flex : 1;
@@ -21,6 +24,11 @@
 .hot .all ul li{
     display : flex;
     align-items: center;
+}
+.hot .all [class^="icon-"] {
+    font-size: 0.45rem;
+    vertical-align: middle;
+    margin-right: 0.15rem;
 }
 .hot .all ul li span{
     font-size : 0.15rem;
@@ -52,7 +60,7 @@
     display : flex;
 }
 .hot .province .data .sup{
-    margin-top: 0.125rem;
+    margin-top: 0.145rem;
     line-height: 1;
     margin-bottom: 0.175rem;
     flex : 1;
@@ -62,6 +70,7 @@
     color : #4c9bfd;
     padding: 0.15rem;
     cursor: pointer;
+    width : 2.5rem;
     display : flex;
     justify-content: space-between;
 }
@@ -80,7 +89,23 @@
 .hot .province .data .sub li{
     font-size: 0.175rem;
     color : #4c9bfd;
+
     padding: 0.15rem;
     display : flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 1600px) {
+    .hot span {
+        transform: scale(0.9);
+    }
+    .hot .province ul.sup li {
+        padding: 0.125rem 0.15rem;
+    }
+    .hot .province ul.sub li {
+        padding: 0.0625rem 0.15rem;
+    }
+    .quarter span {
+        transform: scale(0.9);
+    }
 }

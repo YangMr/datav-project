@@ -1,3 +1,7 @@
+/**监控区域样式***/
+
+
+
 .monitor{
     height : 6rem;
 }
@@ -14,22 +18,22 @@
 }
 .monitor .tabs a{
     color : #1950c4;
-    text-decoration: none;
     font-size: 0.225rem;
+    padding: 0 .3375rem;
 }
 .monitor .tabs a.active{
     color : #fff;
 }
 .monitor .tabs a:first-child{
-    padding-right: 20px;
-    border-right:1px solid #fff;
+    padding-left : 0;
+    border-right: 0.025rem solid #00f2f1;
 }
-.monitor .tabs a:last-child{
-    padding-left: 20px;
-}
+
 .monitor .content{
     flex : 1;
+    position: relative;
 }
+
 .monitor .content .head{
     display:flex;
     justify-content: space-between;
@@ -37,15 +41,32 @@
     background-color: rgba(255, 255, 255, 0.1);
     padding: 0.15rem 0.45rem;
     color :#68d8fe;
+    line-height: 1.05;
 }
 .monitor .content .marquee-view{
     width: 100%;
     overflow: hidden;
-    height: 258px;
-    position: relative;
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0;
 }
 .monitor .content .marquee-view .marquee{
     animation: move 15s linear infinite;
+}
+
+
+
+.monitor .col:first-child{
+    width: 1rem;
+}
+.monitor  .col:nth-child(2) {
+    width: 2.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.monitor .col:nth-child(3){
+    width: 1rem;
 }
 .monitor .content .marquee-view .marquee:hover{
     animation-play-state: paused;
@@ -63,12 +84,7 @@
     color: #68d8fe;
 
 }
-.monitor .content .marquee-view .marquee .col:nth-child(2) {
-    width: 2.5rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+
 
 @keyframes move {
     0%{

@@ -1,3 +1,4 @@
+/**项目概览样式***/
 .overview{
     height : 1.375rem;
 }
@@ -5,17 +6,14 @@
     display: flex;
     justify-content: space-between;
 }
-.overview ul li{
-    /*flex : 1;*/
-}
-
 .overview ul li h4{
     font-size: 0.35rem;
     color : #fff;
+    margin:  0 0 0 0.06rem;
 }
 .overview ul li span{
     color: #4c9bfd;
     font-size: 0.2rem;
     position: relative;
-    top: -8px;
+    top : -0.1375rem;
 }

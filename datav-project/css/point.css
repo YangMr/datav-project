@@ -1,3 +1,4 @@
+/* 销售区域样式 */
 .point{
     height : 4.25rem;
 }
@@ -16,6 +17,7 @@
     box-sizing: border-box;
     padding: 0.45rem 0.375rem;
     background-size: contain;
+    min-width : 100px;
 }
 .point .chart .data .item:last-child{
     margin-top: 0.25rem;
@@ -32,7 +34,7 @@
 }
 
 .point .chart .pie{
-    flex : 1;
+    flex:1;
     width: 3.9rem;
     height: 3rem;
     margin-left : -0.125rem;

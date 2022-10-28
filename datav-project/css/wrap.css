@@ -27,8 +27,8 @@
 }
 .wrap .chart .label{
     position:absolute;
-    left: 46px;
-    top: 23px;
+    left: 0.85rem;
+    top: 0.4125rem;
     color: #fff;
     font-size: 0.375rem;
 }

@@ -247,7 +247,7 @@ $(function (){
             {
                 name: '销售统计',
                 type: 'pie',
-                radius: ["10%", "60%"],
+                radius: ["10%", "50%"],
                 center: ['50%', '50%'],
                 roseType: 'area',
                 itemStyle: {
@@ -555,7 +555,7 @@ $(function (){
         },
         grid: {
             top : "20%",
-            left: '3%',
+            left: '5%',
             right: '4%',
             bottom: '3%',
             containLabel: true,
